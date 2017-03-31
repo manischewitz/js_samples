@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>js</title>
+</head>
+    <script type="text/javascript">
+
+        var array = Array("Hallo ", "world!!!");
+        var arrayWithBraces = ["braces","are", true];
+        document.write(array + "</br><hr/>");
+        document.write(arrayWithBraces + "</br><hr/>");
+
+        var arrayExpanded = Array(6);
+        arrayExpanded[0] = "first element";
+        arrayExpanded[5] = "last element";
+        arrayExpanded[10] = "new last element";
+        document.write(arrayExpanded + "</br><hr/>");
+        
+        var arrayWithNewLength = ["1", "2", "3", "4", "5"];
+        arrayWithNewLength.length = 100;
+        arrayWithNewLength[99] = "i'm last";
+        document.write("New array length is " + arrayWithNewLength.length + " last element: " + arrayWithNewLength[99] + "</br><hr/>");
+
+      /*  document.write("Associative array   </br><hr/>")
+        var associativeArray = {eyes: "black", sex: "female", skin: "white", hairColor: 'blond'};
+        var key = prompt("enter wanted parameter(eyes,skin,hairColor)", "");
+        document.write(associativeArray[key] + " sex " + associativeArray.sex + "</br><hr/>");*/
+
+    </script>
+<body>
+
+    <script type="text/javascript">
+
+        var COLUMNS = 13;
+        var ROWS = 13;
+        var INPUT_ONE = "<img src='bluestar.png' height='50px' width='50px' />";
+        var INPUT_TWO = "<img src='redstar.png' height='50px' width='50px' />";
+
+        var col = Array(COLUMNS);
+
+        for (var a = 0; a < col.length; a++) {
+            col[a] = Array(ROWS);
+        }
+       
+        for (var rows = 0; rows < ROWS; rows++) {
+
+            for (var cols = 0; cols < COLUMNS; cols++) {
+                if((cols % 2) == 0){
+                    col[cols][rows] = INPUT_ONE;
+                    document.write(col[cols][rows]);
+                } else {
+                    col[cols][rows] = INPUT_TWO;
+                    document.write(col[cols][rows]);
+                }
+            }
+            document.write("</br>");
+        }
+
+
+    </script>
+
+    
+
+</body>
+</html>

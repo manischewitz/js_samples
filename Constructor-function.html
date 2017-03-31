@@ -1,0 +1,26 @@
+<html>
+<head>
+    <title>Пользовательский конструктор</title>
+
+    <script type="text/javascript">
+
+        function Person(name) {
+
+            this.name = name;
+
+            this.sayName = function () {
+                document.write("My name is "+this.name+"<br />");
+            }
+        }
+
+        var ivan = new Person("Ivan");
+
+        ivan.sayName();
+
+        
+    </script>
+
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Add DOM to page</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var content = document.getElementById("content");
+
+            var addParButton = document.getElementById("addParButton");
+            var setLinkButton = document.getElementById("setLinkButton");
+            
+
+            addParButton.onclick = function () {
+
+                var paragraph = document.createElement("p");
+
+                paragraph.innerHTML = "Paragraph";
+                content.appendChild(paragraph);
+
+                
+            }
+
+            var header = document.createElement("h1");
+            header.innerHTML = "header";
+
+
+            document.body.insertBefore(header, content);
+
+            var hrefGoogle = document.getElementById("aGoo")
+            var hrefYahoo = document.getElementById("aYah")
+
+            setLinkButton.onclick = function () {
+                hrefGoogle.setAttribute("href", "https://www.google.com");
+
+                hrefYahoo.removeAttribute("href");
+
+                alert(hrefGoogle.getAttribute("href"));
+            }
+
+            
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+
+    <div id="content">
+
+        <input type="button" id="addParButton" value="add paragraph">
+
+        <a id="aGoo">Go Google</a>
+        <a id="aYah" href="https://answers.yahoo.com/">Go Yahoo</a>
+
+        <input type="button" id="setLinkButton" value="set link">
+
+    </div>
+
+</body>
+</html>

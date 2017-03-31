@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>WebWorker</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var h = document.querySelector("#h");
+
+            var worker = new Worker("fibonachi.js");
+
+            worker.onmessage = function (message) {
+                h.innerHTML += message.data + "<br />";
+            }
+
+            worker.postMessage("");
+        }
+
+    </script>
+</head>
+<body>
+    <h3 id="h"></h3>
+</body>
+</html>

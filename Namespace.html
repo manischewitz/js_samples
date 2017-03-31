@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Namespace</title>
+    <script type="text/javascript">
+
+        var Application = Application || {};
+
+        Application.define = function (namespace) {
+
+            var parts = namespace.split(".");
+            var parent = Application;
+            var i;
+
+            if(parts[0] == "Application"){
+                parts = parts.slice(1);
+            }
+
+            for (i = 0; i < parts.length;i++){
+                
+                if (typeof parent[parts[i]] == "undefined") {
+                    parent[parts[i]] = {};
+                }
+                parent = parent[parts[i]];
+            }
+            return parent;
+        }
+
+        //incapsulation
+        var user = (function () {
+            var name;
+
+            return {
+                getName: function () { return name; },
+                setName: function (n) { name = n; }
+            }
+        })();
+
+        user.setName("John Doe");
+        alert(user.getName());
+
+    </script>
+    <script type="text/javascript">
+
+        (function () {
+
+            var ajaxModule = Application.define("Application.utils.ajax");
+            document.write(ajaxModule === Application.utils.ajax);
+
+            var domModule = Application.define("Application.utils.dom");
+            document.write(domModule === Application.utils.dom);
+
+            document.write(Application);
+        })();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

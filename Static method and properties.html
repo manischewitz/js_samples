@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Static method and properties</title>
+    <script type="text/javascript">
+
+        function UsedCar(mileage,fuel) {
+
+            this.mileage = mileage;
+            this.fuel = fuel;
+
+            this.drive = function (howFar) {
+                mileage = mileage + howFar;
+                document.write("You will drive "+howFar+" Your mileage will be "+mileage+"<br />");
+            }
+            //static property analog
+            UsedCar.minPrice = 100;
+            //static method analog
+            UsedCar.getVanillaSpecs = function () {
+                return new UsedCar(0,0);
+            }
+        }
+
+        var opel = new UsedCar(120,13);
+        opel.drive(80);
+
+        UsedCar.getVanillaSpecs().drive(999);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

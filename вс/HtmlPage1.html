@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>MYPAGE</title>
+
+    <script type="text/javascript">
+
+        alert("HALLO WORLD");
+
+        var myVariable = 256;
+        var string = "256";
+        var x = 69;
+        document.write("Expected output: concatenation between var string and var x "+string+x+"<br/>");
+        document.write("Expected output: arithmetical operation between var string and var x " + (string - x) +" <br/><hr/>");
+
+        document.write("HALLO WORLD 2.0 "+myVariable+"<br/>");
+
+        document.write("pos. infinity " + Number.POSITIVE_INFINITY + "<br/>");
+        document.write("number min value "+Number.MIN_VALUE+"<br/>");
+    </script>
+
+</head>
+<body>
+    <script type="text/javascript">
+
+        var x = prompt("Enter data", "here");
+        if(x != null) document.write(x + "<br/>");
+
+        var conf = confirm("Are you sure?");
+        if (conf) document.write("CONFIRMED<br/>");
+
+    </script>
+
+    <script type="text/javascript">
+
+	var x =6;
+	var y =15;	
+	var z =4;	
+
+        var stringOne = "stringOne";
+        var stringTwo = "stringOne1";
+
+	x += y-x++*z;
+
+        if (stringOne == stringTwo){ document.write("MATH<br/>");}
+	if(x == (36+6)) {document.write("Im Right!!");}
+        document.write(2+2*2+2);
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Input filter</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            var inputArray = document.getElementsByTagName("input");
+            
+            for (var i = 0; i < inputArray.length;i++){
+            
+                var element = inputArray[i];
+                if (element.type != "text") continue;
+                if (element.getAttribute("data-chars-allowed") == undefined) continue;
+                element.onkeypress = checkInput;
+            }
+
+            function checkInput(input) {
+                if(!input) input = window.event;
+
+                var charsAllowed = this.getAttribute("data-chars-allowed").split("");
+                var errLabelId = this.getAttribute("data-error-label-id");
+                var errLabel = document.getElementById(errLabelId);
+                
+
+                var char = String.fromCharCode(input.keyCode || input.charCode);
+                
+                for (var i = 0; i < charsAllowed.length;i++){
+                    if (charsAllowed[i] == char) {
+                        errLabel.innerHTML = "";
+                        return;
+                    };
+                }
+                
+                input.preventDefault();
+                errLabel.innerHTML = "Symb is not allowed.";
+            }
+
+        }
+
+
+
+    </script>
+    <style type="text/css">
+
+        label {
+            color: red;
+            font-size:20px;
+        }
+
+    </style>
+</head>
+<body>
+    <h3>login</h3>
+    <input type="text" id="loginInput" data-chars-allowed="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm1234567890" data-error-label-id="loginInError">
+    <label id="loginInError"></label>
+
+    <h3>password</h3>
+    <input type="text" id="passwordInput" data-chars-allowed="QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm_-1234567890" data-error-label-id="passwordInError">
+    <label id="passwordInError"></label>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>js</title>
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        var array = ["Lyft", "(главный конкурент Uber)",
+            "в честь выхода нового фильма дал возможность своим пользователям вызывать вместо обычного такси легендарный автомобль Ecto-1.",
+            "Акция доступна в Бостоне, Лос-Анджелесе, Нью-Йоке, Сан-Франциско и Вашингтоне.", "Зависть!"];
+
+        document.write("<h1>Without join()</h1>");
+        document.write(array + "</br><hr/>");
+        document.write("<h1>With join()</h1></br>");
+        document.write(array.join(" ||| "));
+
+        document.write("<hr/><h1>Another join() example:</h1>");
+        document.write("<p>");
+        document.write(array.join("</p><p>"));
+        document.write("</p>");
+
+        var arrayTWO = ["Немало заметок и обсуждений посвящены непростому вопросу безопасного хранения паролей,",
+            "тема интересная и, похоже, актуальной будет ещё долго.",
+            "Существуют различные программные решения для хранения паролей,",
+            "о них довольно часто пишут на Хабре (например тут и вот тут),",
+            "однако многим из них, как нам кажется, в той или иной степени свойственны следующие недостатки"];
+        var arrayTWOconcat = [" " + Math.random() * 100, " " + Math.random() * 1002];
+
+        document.write("<hr/><h1>Without concat() example:</h1>");
+        document.write(arrayTWO);
+        document.write("<hr/><h1>With concat() example:</h1>");
+        document.write(arrayTWO.concat(arrayTWOconcat));
+
+        document.write("<hr/><h1>Input:</h1>");
+        var userArray = Array();
+        var userVal = prompt("Desired value", "");
+        while (userVal != null) {
+            userArray.push(userVal);
+            //userArray = userArray.concat(userVal);
+            userVal = prompt("Desired value", "value");
+        }
+        document.write(userArray.join("</br>"));
+
+        document.write("<hr/><h1>Without reverse() example:</h1>");
+        var reverseArray = ["М", "и", "р", "к", "а", "к", "Р", "и", "м."];
+        document.write(reverseArray.join(" "));
+        document.write("<hr/><h1>With reverse() example:</h1>");
+        document.write(reverseArray.reverse().join(" "));
+
+
+    </script>
+
+</body>
+</html>

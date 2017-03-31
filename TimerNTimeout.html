@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>timer</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var content = document.getElementById("content");
+            var counter = 0;
+
+            var timout =  window.setTimeout(print,3000);
+
+            function print() {
+                var label = document.createElement("label");
+                label.innerHTML = "3 seconds left";
+                content.appendChild(label);
+            }
+
+            var interval = window.setInterval(count,5000);
+
+            function count() {
+                counter++;
+                var label = document.createElement("label");
+                label.innerHTML = "<br/>" + counter + " 5 seconds left ";
+                content.appendChild(label);
+            }
+
+            document.getElementById("cancelTimeout").onclick = function () {
+                window.clearTimeout(timout);
+            }
+
+            document.getElementById("cancelInterval").onclick = function () {
+                window.clearInterval(interval);
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+
+    <div id="content">
+
+        <input type="button" id="cancelTimeout" value="cancel timeout">
+        <input type="button" id="cancelInterval" value="cancel interval">
+    </div>
+
+</body>
+</html>

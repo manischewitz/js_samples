@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>js</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        document.write("<h1>Literal function</h1>");
+
+        var func = function () {
+            document.write("hallo!!");
+        };
+
+        func();
+
+        document.write("<h1>Inner function</h1>");
+
+        function out() {
+
+            inner();
+
+            function inner() {
+                document.write("<p  style='background-color: black;'>");
+                document.write("<iframe width='420' height='315' src='https://www.youtube.com/embed/re9XMltMyzQ' frameborder='0' allowfullscreen></iframe><hr/>");
+                document.write("</p>");
+            }
+
+            inner();
+
+        }
+
+        out();
+
+        document.write("<h1>Function as argument</h1>");
+
+        var multiply = function (a,b) {
+            return a * b;
+        }
+
+
+        function doSmthWithTwoNumbers(someFunction,numOne,numTwo) {
+            var result = someFunction(numOne, numTwo);
+            document.write("<p  style='background-color: pink;'>"+result+"</p>");
+        }
+
+        this.doSmthWithTwoNumbers(multiply,4,5);
+
+
+    </script>
+</body>
+</html>

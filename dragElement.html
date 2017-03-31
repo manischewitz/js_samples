@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>drag element</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var element = document.getElementById("drag");
+            element.onmousedown = drag;
+
+
+            function drag(event) {
+                var element = this;
+
+                var startX = event.clientX;
+                var startY = event.clientY;
+
+                var originX = element.offsetLeft;
+                var originY = element.offsetTop;
+
+                var deltaX = startX - originX;
+                var deltaY = startY - originY;
+
+                document.onmousemove = moveHandler;
+                document.onmouseup = upHandler;
+
+                function moveHandler(event) {
+                    if (!event) event = window.event;
+
+                    element.style.left = (event.clientX - deltaX) + "px";
+                    element.style.top = (event.clientY - deltaY) + "px";
+                }
+
+                function upHandler(event) {
+                    if (!event) event = window.event;
+
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            }
+        }
+
+        window.onbeforeunload = function () {
+            alert("Do you really want to leave Vulcan casino?");
+            return "text";
+        }
+
+    </script>
+</head>
+<body>
+    <div id="drag" style="position:absolute; height:100px; width:100px; background-color:aquamarine;"></div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>DOM sorting</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            document.getElementById("sort").onclick = function () {
+
+                sortChilderen("list");
+
+            }
+
+            function sortChilderen(name) {
+
+                if (typeof name == "string") name = document.getElementById(name);
+
+                var children = [];
+
+                for (var h = name.firstChild; h != null;h = h.nextSibling){
+                    if (h.nodeType == Node.ELEMENT_NODE) children.push(h);
+                }
+
+                children.sort(function (a,b) {
+                    var c = a.firstChild.data;
+                    var d = b.firstChild.data;
+
+                    if (c < d) return -1;
+                    else if (c > d) return 1;
+                    else return 0;
+
+                });
+
+                for (var i = 0 ; i < children.length; i++) {
+                    name.appendChild(children[i]);
+                }
+            }
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+    <ul id="list">
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+        <li>Four</li>
+        <li>Five</li>
+    </ul>
+
+    <input type="button" id="sort" value="Sort">
+
+</body>
+</html>

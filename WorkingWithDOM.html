@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Working with DOM</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            //changing elements
+            console.time("antipattern");
+            for (var i = 0; i < 1000; i++) {
+                document.querySelector("#paragraph").innerHTML += i + " ";
+            }
+            console.timeEnd("antipattern");
+
+            console.time("pattern");
+            var e = "";
+            for (var i = 0; i < 1000; i++) {
+                e += i + " ";
+            }
+            document.querySelector("#paragraph").innerHTML = e;
+            console.timeEnd("pattern");
+
+            //querySelector vs. getById
+            console.time("querySelector");
+            for (var i = 0; i < 1000; i++) {
+                document.querySelector("#paragraph");
+            }
+            console.timeEnd("querySelector");
+
+            console.time("getById");
+            for (var i = 0; i < 1000; i++) {
+                document.getElementById("paragraph");
+            }
+            console.timeEnd("getById");
+
+            //changing style
+            console.time("unpreffered one");
+            for (var i = 0; i < 1000; i++) {
+                document.querySelector("#paragraph").style.border = "1px solid red";
+                document.querySelector("#paragraph").style.fontSize = "33px";
+            }
+            console.timeEnd("unpreffered one");
+
+            console.time("unpreffered two");
+            var element = document.querySelector("#paragraph");
+            for (var i = 0; i < 1000; i++) {
+                element.style.border = "1px solid red";
+                element.style.fontSize = "33px";
+            }
+            console.timeEnd("unpreffered two");
+
+            console.time("preffered");
+            for (var i = 0; i < 1000; i++) {
+                element.className = "newParagraph";
+            }
+            console.timeEnd("preffered");
+
+            //adding DOM elements
+            var p;
+            var text;
+            var fragment = document.createDocumentFragment();
+
+            console.time("strict adding");
+            for (var i = 0; i < 100; i++) {
+                p = document.createElement("p");
+                text = document.createTextNode("This paragraph");
+
+                p.appendChild(text);
+                document.body.appendChild(p);
+            }
+            console.timeEnd("strict adding");
+
+            console.time("using documentFragment");
+            
+            for (var i = 0; i < 100; i++) {
+                p = document.createElement("p");
+                text = document.createTextNode("This paragraph");
+
+                p.appendChild(text);
+                fragment.appendChild(p);
+            }
+            document.body.appendChild(fragment);
+            console.timeEnd("using documentFragment");
+
+        }
+    </script>
+    <style>
+
+        .newParagraph {
+            border: 1px solid red;
+            font-size: 33px;
+        }
+
+    </style>
+</head>
+<body>
+    <p id="paragraph"></p>
+</body>
+</html>

@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Functional JS</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            //closures
+            function closureSample() {
+                var str = "Hallo world<br/>";
+
+                function sayHallo(name) {
+                    document.write(name + " " + str);
+                }
+                return sayHallo;
+            }
+
+            var myFun = closureSample();
+
+            //myFun("Ivan");
+
+            function size(size) {
+                return function () {
+                    document.body.style.fontSize = size + "px";
+                }
+            }
+
+            var s12 = size(12);
+            var s22 = size(22);
+            var s33 = size(33);
+            var s44 = size(44);
+
+            document.getElementById("b12").onclick = s12;
+            document.getElementById("b22").onclick = s22;
+            document.getElementById("b33").onclick = s33;
+            document.getElementById("b44").onclick = s44;
+
+            //memoization
+            function calcFib(x) {
+                if (!calcFib.cache[x]) {
+
+                    if (x > 1) {
+                        calcFib.cache[x] = calcFib(x - 1) + calcFib(x - 2);
+                    } else {
+                        calcFib.cache[x] = x;
+                    }
+                }
+                return calcFib.cache[x];
+            }
+
+            calcFib.cache = {};
+
+            for (var z = 1; z <= 40; z++) {
+                var p = document.createElement("p");
+                p.innerHTML = z +" "+ calcFib(z)+"<br/>";
+                document.body.appendChild(p);
+            }
+
+            //find max value in array
+            function max() {
+                var array = [34, 35, 6437, 567, 43534, 675765, 9000, 765, 34, 23, 4, 231, 56];
+
+                var maxValue = Math.max.apply(null,array);
+
+                var p = document.createElement("b");
+                p.innerHTML = "<--- " + maxValue + " ---><br/>";
+                document.body.appendChild(p);
+            }
+            max();
+
+            //curring
+            function multiply(x,y) {
+                var oldX = x;
+                var oldY = y;
+                if(typeof oldY == "undefined"){
+                    return function (newY) {
+                        return oldX * newY;
+                    }
+                }
+                return x * y;
+            }
+
+            var multiplyByFive = multiply(5);
+            alert(multiplyByFive(10)); //fifty
+            alert(multiplyByFive(5)); //twenty five
+
+            function curry(fn) {
+                var slice = Array.prototype.slice;
+                var oldArguments = slice.call(arguments, 1);
+
+                return function () {
+                    var newArguments = slice.call(arguments);
+                    var arguments = oldArguments.concat(newArguments);
+
+                    return fn.apply(null,arguments);
+                }
+            }
+
+            function add(x, y, z) {
+                return x + y + z;
+            }
+
+            var addFiftyFive = curry(add,55,100);
+            alert(addFiftyFive(100));
+        }
+    </script>
+</head>
+<body>
+    <a href="#" id="b12">12</a>
+    <a href="#" id="b22">22</a>
+    <a href="#" id="b33">33</a>
+    <a href="#" id="b44">44</a>
+</body>
+</html>

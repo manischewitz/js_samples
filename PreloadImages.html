@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Preload images</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var images = [];
+
+            images = preload(
+                "http://i.imgur.com/UXRJF8h.jpg",
+                "http://i.imgur.com/OkTUKML.jpg",
+                "http://i.imgur.com/IeMSa8U.jpg",
+                "http://i.imgur.com/ac5vq7T.jpg"
+                );
+
+            for (var i = 0; i < images.length; i++) {
+                document.body.appendChild(images[i]);
+            }
+
+        }
+
+        function preload() {
+            var out = [];
+            for (var i = 0; i < preload.arguments.length; i++) {
+                out[i] = new Image();
+                out[i].src = preload.arguments[i];
+            }
+            return out;
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

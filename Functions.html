@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Functions</title>
+    <script type="text/javascript">
+
+        //scope
+        function doMath() {
+            
+            document.write(i+"<br/>");
+            document.write(test+"<br/>");
+
+            for (var i = 0; i < 12;i++){
+                var test = i;
+            }
+
+            document.write(i+"<br/>");
+            document.write(test+"<br/>");
+        }
+
+        doMath();
+
+        //context
+        function isItWindowContext() {
+            document.write((this === window) + "<br/>");
+        }
+
+        isItWindowContext();
+
+        var newObject = {
+            method: isItWindowContext
+        }
+
+        newObject.method();
+
+        new isItWindowContext();
+
+        //callback
+        (function makeParagraphs(number) {
+            for (var k = 0; k < number; k++) {
+                var paragraph = document.createElement("p");
+                paragraph.innerHTML = "It is paragraph No. " + k;
+                document.body.appendChild(paragraph);
+            }
+        })(10);
+
+        function paintYourStyle(yourStyle,callbackObject) {
+            var paragrahs = document.getElementsByTagName("p");
+            var callback = false;
+
+            if (typeof yourStyle == "function") callback = true;
+
+            for (var k = 0; k < paragrahs.length; k++) {
+                var paragraph = paragrahs[k];
+
+                if (callback) {
+                    yourStyle.call(callbackObject, paragraph);
+                }
+            }
+        }
+
+        function styleExample(node) {
+            node.style.border = "2px solid green";
+            node.style.backgroundColor = "crimson";
+        }
+
+        paintYourStyle(styleExample);
+
+        var badExample = {
+            borderWidth:"3px",
+            borderColor:"black",
+            backgroundColor: "lightgreen",
+            setStyle: function (node) {
+                node.style.border = this.borderWidth + " solid " + this.borderColor;
+                node.style.backgroundColor = this.backgroundColor;
+            }
+        }
+
+        //there is window context
+        paintYourStyle(badExample.setStyle,badExample);
+
+        //self define function
+        function callMeOnce(){
+        
+            document.write("CALLED" + "<br/>");
+
+            callMeOnce = function () {
+                document.write("You can call this function only once." + "<br/>");
+            }
+        }
+
+        callMeOnce();
+        callMeOnce();
+
+        //self call function
+        (function (global) { document.write(this + "<br />") })(this);
+
+        var user = {
+            name:(function(){
+                first = "Boris";
+                last = "Vodka";
+                return first + " " + last;
+            })(),
+            sayName: function () {
+                document.write(this.name+ "<br />");
+            }
+        }
+
+        user.sayName();
+
+        //function definition
+        var utils = {
+            addListener:null,
+            removeListener:null
+        }
+
+        if(typeof window.addEventListener === "function"){
+        
+            utils.addListener = function(obj,type,fun){
+                obj.addEventListener(type,fun,false);
+            }
+            utils.removeListener = function(obj,type,fun){
+                obj.removeEventListener(type,fun,false);
+            }
+
+        } else if (typeof window.attachEvent === "function") {
+
+            utils.addListener = function (obj, type, fun) {
+                obj.attachEvent("on"+type, fun);
+            }
+            utils.removeListener = function (obj, type, fun) {
+                obj.detachEvent("on" + type, fun);
+            }
+
+        }else {
+        
+            utils.addListener = function (obj, type, fun) {
+                obj["on" + type] = fun;
+            }
+            utils.removeListener = function (obj, type) {
+                obj["on" + type] = null;
+            }
+
+        }
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>ToolTip</title>
+    <style type="text/css">
+
+        .tooltip {
+            background-color:antiquewhite;
+            border: 1px solid black;
+            position: absolute;
+            visibility: hidden;
+        }
+
+    </style>
+    <script type="text/javascript">
+
+        function Tooltip() {
+            this.toolTip = document.createElement("div");
+            this.toolTip.className = "tooltip";
+        }
+
+        Tooltip.prototype.show = function (text,x,y) {
+            this.toolTip.innerHTML = text;
+            this.toolTip.style.left = x + "px";
+            this.toolTip.style.top = y + "px";
+            this.toolTip.style.visibility = "visible";
+
+            if (this.toolTip.parentNode != document.body) {
+                document.body.appendChild(this.toolTip);
+            }
+        }
+
+        Tooltip.prototype.hide = function () {
+            this.toolTip.style.visibility = "hidden";
+        }
+
+
+
+
+
+
+
+
+
+
+        var flyingBlock;
+        var fly = 0;
+        var tooltip = new Tooltip();
+
+        window.onload = function () {
+            var text = document.getElementById("text");
+            text.onmousemove = mouseMoveHandler;
+            text.onmousedown = mouseOutHandler;
+            flyingBlock = document.getElementById("flyingBlock");
+        }
+
+        function mouseMoveHandler(event) {
+            if (!event) event = window.event;
+            tooltip.show("Some important text", event.clientX + 10,event.clientY+10);
+        }
+
+        function mouseOutHandler() {
+            tooltip.hide;
+        }
+
+
+        
+
+        window.setInterval(function () {
+            flyingBlock.style.left = fly + "px";
+            fly++;
+        }, 100);
+
+
+
+    </script>
+</head>
+<body>
+    <div id="text">Прежде всего хотелось бы сказать несколько слов о маркете Amazon AWS Marketplace.
+     В отличии от Google Play и App Store, где выкладываются мобильные приложения, на AWS разработчики выкладывают серверные приложения. 
+    Здесь можно найти много интересного, начиная от бесплатного стека LAMP и заканчивая серверными Enterprise-решениями вроде SAP.
+    Прелесть работы с маркетом кроется в быстроте и удобстве развертывания. 
+    Требуемый сервер приложений, как правило, уже настроен, оптимально сконфигурирован и будет запущен во время запуска самого EC2 инстанса (виртуального сервера Amazon EC2). 
+    Запуск инстанса происходит из веб-интерфейса и не требует каких-то дополнительных админских знаний и умений.
+    </div>
+
+    <div id="flyingBlock" style="background-color:greenyellow;height:100px;width:100px;border:1px solid black;position:absolute;"></div>
+</body>
+</html>

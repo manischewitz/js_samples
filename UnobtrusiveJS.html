@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Unobtrusive JS</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            document.getElementById("answerButton").onclick = function () {
+
+                var radioButtons = document.getElementsByName("answer");
+
+                var result = "";
+
+                for (var i = 0; i < radioButtons.length; i++) {
+                    result += radioButtons[i].value + " " + radioButtons[i].checked + "\r\n";
+                }
+                alert(result);
+            }
+
+            document.getElementById("getRed").onclick = function () {
+                
+                var elementsArray = document.getElementsByTagName("p");
+
+                for (var i = 0; i < elementsArray.length; i++){
+                    elementsArray[i].style.color = "red";
+                }
+            }
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+    Luna<input type="radio" name="answer" value="Luna"/>
+    Venus<input type="radio" name="answer" value="Venus"/>
+    Pluto<input type="radio" name="answer" value="Pluto"/>
+
+    <input id="answerButton" type="button" value="Get answer"/><br />
+
+    <p>*   *  ***** *     *     *****</p>
+    <p>*   *  *     *     *     *   *</p>
+    <p>*****  ***** *     *     *   *</p>
+    <p>*   *  *     *     *     *   *</p>
+    <p>*   *  ***** ***** ***** *****</p>
+    <br />
+    <input id="getRed" type="button" value="Get red" />
+    
+
+</body>
+</html>

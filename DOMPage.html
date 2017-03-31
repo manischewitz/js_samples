@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>DOM Page</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var buttonCounter = -1;
+           
+
+            var list = document.getElementById("list");
+
+            document.getElementById("firstElmButton").onclick = function () {
+
+                for (var i = 0; i < list.childNodes.length; i++) {
+
+                    var child = list.childNodes[i];
+
+                    if (child.nodeType == 1) {
+                        child.style.color = "red";
+                        break;
+                    }
+                }
+            }
+
+            document.getElementById("lastElmButton").onclick = function () {
+
+                const length = list.childNodes.length;
+
+                for (var i = 0; i < length; i++) {
+
+                    var child = list.childNodes[length - i - 1];
+
+                    if (child.nodeType == 1) {
+                        child.style.color = "red";
+                        break;
+                    }
+                }
+
+            }
+
+            document.getElementById("nextElmButton").onclick = function () {
+
+                const length = list.childNodes.length;
+                var elements = [];
+                buttonCounter++;
+
+                for (var i = 0; i < length; i++) {
+
+                    var child = list.childNodes[i];
+
+                    if (child.nodeType == 1) {
+                        child.style.color = "black";
+                        elements.push(child);
+                     }
+                }
+
+                if (buttonCounter == elements.length) buttonCounter = 0;
+
+                elements[buttonCounter].style.color = "green";
+
+              }
+
+            document.getElementById("previousElmButton").onclick = function () {
+
+                const length = list.childNodes.length;
+                var elements = [];
+                buttonCounter--;
+
+                for (var i = 0; i < length; i++) {
+
+                    var child = list.childNodes[i];
+
+                    if (child.nodeType == 1) {
+                        child.style.color = "black";
+                        elements.push(child);
+                    }
+                }
+
+                if (buttonCounter == elements.length) buttonCounter = 0;
+                if (buttonCounter < 0) buttonCounter = elements.length - 1;
+
+                elements[buttonCounter].style.color = "green";
+
+            }
+
+            document.getElementById("addElmButton").onclick = function () {
+
+                var listLine = document.createElement("li");
+                listLine.innerHTML = "New element";
+
+                list.appendChild(listLine);
+
+            }
+
+            document.getElementById("deleteElmButton").onclick = function () {
+
+                var child = list.childNodes;
+
+                if (child.length < 8) return;
+                else list.removeChild(child[child.length-1]);
+
+            }
+
+            document.getElementById("addBegElmButton").onclick = function () {
+
+                var listLine = document.createElement("li");
+                listLine.innerHTML = "New element in beginning";
+
+                list.insertBefore(listLine,list.childNodes[0]);
+
+            }
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+    <div id="content">
+
+        <ul id="list">
+            <li>Item One</li>
+            <li>Item Two</li>
+            <li>Item three</li>
+            <li>Item four</li>
+        </ul>
+        <br />
+
+        <input type="button" id="firstElmButton" value="Choice first element"/><br />
+        <input type="button" id="lastElmButton" value="Choice last element" /><br />
+        <input type="button" id="nextElmButton" value="Choice next element" /><br />
+        <input type="button" id="previousElmButton" value="Choice previous element" /><br />
+        <input type="button" id="addElmButton" value="Add element" /><br />
+        <input type="button" id="deleteElmButton" value="Delete element" /><br />
+        <input type="button" id="addBegElmButton" value="Add element to beginning " /><br />
+
+    </div>
+
+</body>
+</html>

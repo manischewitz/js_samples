@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Overriding</title>
+    <script type="text/javascript">
+
+        function Sphere(radius) {
+
+            this.radius = radius;
+        }
+
+        Sphere.prototype.GetVolume = function () {
+            var volume = Math.PI * (4 / 3) * this.radius;
+            document.write("Sphere volume with radius "+this.radius+" is "+volume+"<br />");
+            return volume;
+        }
+
+        Sphere.prototype.name = "Geometrical object.";
+
+        //toString function from Object
+        Sphere.prototype.toString = function () {
+            return "Radius of this geometrical object is "+this.radius;
+        }
+
+        //valueOf function from Object
+        Sphere.prototype.valueOf = function () {
+            return this.GetVolume();
+        }
+
+        Sphere.prototype.equals = function (compareWith) {
+            return (this.radius === compareWith.radius);
+        }
+
+        Sphere.prototype.compareTo = function (compareWith) {
+            if (this.radius < compareWith.radius) {
+                return -1;
+            } else if (this.radius > compareWith.radius) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var sphereOne = new Sphere(100);
+        var sphereTwo = new Sphere(60);
+
+        //Value 'name' in prototype does not change. Propery 'name' will create in sphereOne object
+        //If need change prototype value 'name' it can be done through Sphere.prototype.name
+        sphereOne.name = "Eearth";
+
+        sphereOne.GetVolume(33);
+
+        document.write("Sphere one name " + sphereOne.name + "<br />");
+        document.write("Sphere two name " + sphereTwo.name + "<br />");
+
+        document.write(sphereTwo.toString() + "<br />");
+        //valueOf by 'default'
+        document.write(sphereTwo + " - valueOf() result <br />");
+
+        document.write(" 'radius' is in sphereOne "+("radius" in sphereOne)+"<br/>");
+        document.write(" 'name' is in sphereOne " + ("name" in sphereOne) + "<br/>");
+        document.write(" 'name' is in sphereTwo " + ("name" in sphereTwo) + "<br/>");
+        document.write(" 'name' is in sphereOne " + sphereOne.hasOwnProperty("name") + "<br/>");
+        document.write(" 'name' is in sphereTwo " + sphereTwo.hasOwnProperty("name") + "<br/>");
+
+        var sphereThree = new Sphere(60);
+
+        if (sphereTwo.equals(sphereThree)) {
+            document.write("These spheres are equal.<br />");
+        }
+
+        if(!sphereOne.equals(sphereThree)){
+            document.write("These spheres are not equal.<br />");
+        }
+
+        if (sphereOne.compareTo(sphereTwo) > 0) {
+            document.write("Sphere one is bigger than sphere two.");
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Prototypes</title>
+    <script type="text/javascript">
+
+        function Sphere(radius) {
+
+            this.radius = radius;
+        }
+
+        Sphere.prototype.GetVolume = function () {
+            var volume = Math.PI * (4 / 3) * this.radius;
+            document.write("Sphere volume with radius "+this.radius+" is "+volume+"<br />");
+            return volume;
+        }
+
+        Sphere.prototype.name = "Geometrical object.";
+
+        var sphereOne = new Sphere(100);
+        var sphereTwo = new Sphere(60);
+
+        //Value 'name' in prototype does not change. Propery 'name' will create in sphereOne object
+        //If need change prototype value 'name' it can be done through Sphere.prototype.name
+        sphereOne.name = "Eearth";
+
+        sphereOne.GetVolume(33);
+
+        document.write("Sphere one name " + sphereOne.name + "<br />");
+        document.write("Sphere two name " + sphereTwo.name + "<br />");
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>BarChart</title>
+    <script type="text/javascript">
+        function BarChart(values,height,width,color) {
+            var chart = document.createElement("div");
+            chart.style.width = width+"px";
+            chart.style.height = height + "px";
+            chart.style.position = "relative";
+
+            var max = Number.NEGATIVE_INFINITY;
+            for (var i = 0; i < values.length; i++) {
+                if(max < values[i]) max=values[i];
+            }
+
+            var scale = height / max;
+            var barWidth = Math.floor(width / values.length);
+
+            for (var i = 0; i < values.length; i++) {
+                var bar = document.createElement("div");
+
+                bar.style.height = values[i] * scale + "px";
+                bar.style.width = barWidth - 4 + "px";
+                bar.style.backgroundColor = color;
+                bar.style.position = "absolute";
+                bar.style.margin = "4px";
+                bar.style.bottom = "0px";
+                bar.style.left = barWidth * i + "px";
+
+                chart.appendChild(bar);
+            }
+            return chart;
+        }
+
+    </script>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var barChart = new BarChart([22,432,543,34,556,122,331,66,87,100],1000,1000,"red");
+
+            document.body.appendChild(barChart);
+
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

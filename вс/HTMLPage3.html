@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>lottery</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        document.write("Lottery. </br>");
+        var tries = 0;
+
+        //var win = false;
+
+        //while(win == false){
+        
+        //    var userNumber = prompt("Enter any number between 1 and 70 (include). If you want exit just enter number not from this diapason.");
+
+        //    var happyNumber = Math.floor(Math.random() * 70);
+        //    document.write(happyNumber+"</br>");
+
+        //    tries++;
+
+        //    if (userNumber > 70 || userNumber < 1) {
+        //        document.write("Tries: " + tries);
+        //        tries = 0;
+        //        break;
+        //    }
+
+        //    if (userNumber == happyNumber) {
+        //        document.write("You win! Tries: " + tries);
+        //        tries = 0;
+        //        break;
+        //    }
+        //   }
+        
+        var chance = prompt("Chance: 1 to @your value@ (only positive numbers greater than zero.)");
+        var userNumber = prompt("Enter any positive number between 0 and @chance (include). If you want exit just enter number not from this diapason.");
+        var win = false;
+
+        while(win == false){
+
+            if (chance == null || chance <= 1) {
+                document.write("only positive numbers greater than one.</br>");
+                break;
+            }
+
+            if (userNumber == null || userNumber < 0 || userNumber > chance) break;
+
+            tries++;
+
+            if (userNumber == (Math.floor(Math.random() * chance))) {
+                document.write("win. Tries: " + tries);
+                break;
+            }
+        }
+
+    </script>
+</body>
+</html>

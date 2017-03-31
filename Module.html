@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Module</title>
+    <script type="text/javascript">
+
+        var Application = Application || {};
+        
+        Application.define = function (namespace) {
+
+            var parts = namespace.split(".");
+            var parent = Application;
+            var i;
+
+            if (parts[0] == "Application") {
+                parts = parts.slice(1);
+            }
+
+            for (i = 0; i < parts.length; i++) {
+
+                if (typeof parent[parts[i]] == "undefined") {
+                    parent[parts[i]] = {};
+                }
+                parent = parent[parts[i]];
+            }
+            return parent;
+        }
+        
+    </script>
+    <script type="text/javascript">
+
+        Application.define("Application.util.userService");
+
+        Application.util.userService = (function () {
+
+            var name;
+            var password;
+            var email;
+
+            function _setPassword(p) {
+                password = p;
+            }
+
+            function _setName(n) {
+                name = n;
+            }
+
+            function _setEmail(e) {
+                email = e;
+            }
+            
+            function _toString() {
+                return name + " " + password + " " + email;
+            }
+            return {
+                setName: _setName,
+                setPassword: _setPassword,
+                setEmail: _setEmail,
+                toString:_toString
+            }
+
+        })();
+    </script>
+    <script type="text/javascript">
+
+        var user = Application.util.userService;
+
+        user.setName("John");
+        user.setPassword("Doe");
+        user.setEmail("john@doe.com");
+
+        document.write(user.toString());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

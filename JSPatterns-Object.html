@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>JSPatterns-Object Literals</title>
+    <script type="text/javascript">
+
+        //use literals if object uses without reuse
+        var user = {
+            name: "LIT",
+            age: 24,
+            getAge: function () {
+                return this.age;
+            }
+        }
+
+        document.write(user.name+"<br />");
+
+        delete user.name;
+
+        document.write(user.name + "<br />");
+
+        function Item(name) {
+            
+            if (!(this instanceof Item)) return new Item(name);
+
+            this.name = name;
+        }
+
+        Item.prototype.getName = function () {
+            return "Item name is " + this.name +"<br />";
+        }
+
+        var item = new Item("Book");
+
+        document.write(item.getName());
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

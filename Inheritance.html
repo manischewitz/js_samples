@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Inheritance</title>
+    <script type="text/javascript">
+        //classic
+        function Class() {
+            var property;
+            this.publicProperty = "Hello from parent";
+        }
+
+        Class.prototype.setProperty = function (p) {
+            property = p;
+        }
+
+        Class.prototype.getProperty = function () {
+            return property;
+        }
+
+        function DerivativeClass() { }
+
+        function inherit(parent, derivative) {
+            var F = function () { };
+            F.prototype = parent.prototype;
+            derivative.prototype = new F();
+        }
+        
+        inherit(Class,DerivativeClass);
+        var kid = new DerivativeClass();
+        kid.setProperty("Ivan");
+
+        document.write(kid.getProperty());
+        document.write("<br />");
+        document.write(kid.hasOwnProperty("publicProperty"));
+        document.write("<br />");
+        document.write(kid.publicProperty);//getter is needed
+
+        //modern ECMA5
+        var Base = {
+            baseProp:"",
+            innerProp: "something" 
+        }
+
+        var derived = Object.create(Base, {ownProp:{value:"OWN"}});
+
+        document.write("<br />");
+        document.write(derived.baseProp);
+        document.write("<br />");
+        document.write(derived.innerProp);
+        document.write("<br />");
+        document.write(derived.ownProp);
+
+        //extend
+        function extend(parent,child) {
+            var i;
+            var toString = Object.prototype.toString;
+            var arrayStr = "[object Array]";
+
+            child = child || {};
+            
+            for (i in parent) {
+                if (parent.hasOwnProperty(i)) {
+                    if (typeof parent[i] == "object") {
+                        child[i] = (toString.call(parent[i]) == arrayStr) ? [] : {};
+                        extend(parent[i], child[i]);
+                    } else {
+                        child[i] = parent[i];
+                    }
+                } 
+            }
+            return child;
+        }
+
+        var classOne = {
+            prop: "hello",
+            world: "world"
+        };
+
+        var classOneChild = {
+            message: "from child class"
+        };
+
+        extend(classOne, classOneChild);
+
+        document.write("<br />");
+        document.write(classOneChild.message);
+        document.write("<br />");
+        classOne.prop += " added ";
+        document.write(classOneChild.prop);
+        document.write("<br />");
+        document.write(classOne.prop);
+        document.write("<br />");
+        document.write(classOne.world);
+
+        //create one
+        function createOne() {
+            var arg;
+            var prop;
+            var child = {};
+
+            for (arg = 0; arg < property.length;arg++){
+                for (prop in arguments[arg]) {
+                    if (arguments[arg].hasOwnProperty(prop)) {
+                        child[prop] = arguments[arg][prop];
+                    }
+                }
+            }
+            return child;
+        }
+
+        var one = {propone:"Hello"};
+        var two = {proptwo:"from"};
+        var three = {propthree:"these"};
+        var four = {propfour:"classes"};
+
+        var allInOne = createOne(one, two, three, four);
+
+        console.dir(allInOne);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

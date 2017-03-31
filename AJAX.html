@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Asynchronous JS And XML</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            document.getElementById("GETSynchronously").onclick = function () {
+                var request = new XMLHttpRequest();
+                request.open("GET", "https://graph.facebook.com/v2.8/therealdjswagger?access_token", false);
+                request.send();
+                show();
+
+                var timeout = 500;
+                var timer = window.setTimeout(function () { request.abort(); alert("aborted"); }, timeout);
+
+                var div = document.createElement("div");
+                div.innerHTML = request.responseText;
+                hide();
+                window.clearTimeout(timer);
+                document.body.appendChild(div);
+                
+            }
+
+            document.getElementById("GETAsynchronously").onclick = function () {
+                var request = new XMLHttpRequest();
+                request.open("GET", "https://graph.facebook.com/v2.8/therealdjswagger?access_token", true);
+
+                var timeout = 500;
+                var timer = window.setTimeout(function () { request.abort(); alert("aborted");},timeout);
+
+                request.onreadystatechange = function () {
+                    if (request.readyState == 4) {
+                        if (request.status == 200 || request.status == 400) {
+                            window.clearTimeout(timer);
+                            hide();
+                            var div = document.createElement("div");
+                            var json = JSON.parse(request.responseText);
+                            div.innerHTML = json.toString();
+                            document.body.appendChild(div);
+                        }
+                    }
+                }
+                request.send();
+                show();
+            }
+
+            document.getElementById("POSTAsynchronously").onclick = function () {
+                var request = new XMLHttpRequest();
+                request.open("POST", "https://graph.facebook.com/v2.8/therealdjswagger?access_token", true);
+
+                var timeout = 500;
+                var timer = window.setTimeout(function () { request.abort(); alert("aborted"); }, timeout);
+
+                request.onreadystatechange = function () {
+                    if (request.readyState == 4) {
+                        if (request.status == 403 || request.status == 400) {
+                            window.clearTimeout(timer);
+                            hide();
+                            var div = document.createElement("div");
+                            div.innerHTML = request.responseText;
+                            document.body.appendChild(div);
+                        }
+                    }
+                }
+                request.send("hallo world");
+                show();
+            }
+
+            var animation = document.getElementById("animation");
+
+            function show() {
+                animation.style.display = "block";
+            }
+
+            function hide() {
+                animation.style.display = "none";
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+    <input type="button" id="GETSynchronously" value="get synh">
+    <input type="button" id="GETAsynchronously" value="get asynh">
+    <input type="button" id="POSTAsynchronously" value="post asynh">
+
+    <!-- http://www.ajaxload.info/ -->
+    <p id="animation" style="display:none;"><img src="ajax-loader.gif" /></p>
+</body>
+</html>

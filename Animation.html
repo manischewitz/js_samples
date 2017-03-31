@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Animation</title>
+    <script type="text/javascript" src="Animation.js"></script>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var animation = new Animation(
+                "animCanvas",
+                1,
+                ["http://i.imgur.com/UXRJF8h.jpg",
+                "http://i.imgur.com/OkTUKML.jpg",
+                "http://i.imgur.com/IeMSa8U.jpg",
+                "http://i.imgur.com/ac5vq7T.jpg"]);
+
+            document.getElementById("start").onclick = function(){
+                animation.start();
+            }
+
+            document.getElementById("stop").onclick = function(){
+                animation.stop();
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <img id="animCanvas" src="http://i.imgur.com/UXRJF8h.jpg">
+    <br />
+    <input type="button" id="start" value="start">
+    <input type="button" id="stop" value="stop">
+</body>
+</html>

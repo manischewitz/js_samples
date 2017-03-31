@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Navigator</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            document.getElementById("goto").onclick = function () {
+                document.location = "https://www.google.com";
+            }
+
+            document.getElementById("getInfo").onclick = function () {
+                var header = document.createElement("h4");
+
+                for(var propName in navigator){
+                    header.innerHTML += propName + " -> " + navigator[propName] + "<br />";
+                }
+
+                document.body.appendChild(header);
+            }
+
+            document.getElementById("getPos").onclick = function () {
+                var header = document.createElement("h4");
+
+                header.innerHTML += "X position " + Geometry.getWindowX() + "<br />";
+                header.innerHTML += "Y position " + Geometry.getWindowY() + "<br />";
+                header.innerHTML += "Height " + Geometry.getViewportHeight() + "<br />";
+                header.innerHTML += "Width " + Geometry.getViewportWidth() + "<br />";
+
+                document.body.appendChild(header);
+            }
+
+            document.getElementById("getRes").onclick = function () {
+                var header = document.createElement("h4");
+
+                header.innerHTML = "Width: " + screen.width + "<br />";
+                header.innerHTML += " Height: " + screen.height + "<br />";
+
+                document.body.appendChild(header);
+            }
+
+        }
+
+        function Geometry() { }
+
+        if (window.screenLeft || window.screenLeft == 0) { // for IE 
+            Geometry.getWindowX = function () { return window.screenLeft; };
+            Geometry.getWindowY = function () { return window.screenTop; };
+        }
+        else if (window.screenX || window.screenX == 0) { // for Firefox 
+            Geometry.getWindowX = function () { return window.screenX; };
+            Geometry.getWindowY = function () { return window.screenY; };
+        }
+
+        if (window.innerWidth) {
+            Geometry.getViewportWidth = function () { return window.innerWidth; };
+            Geometry.getViewportHeight = function () { return window.innerHeight; };
+        }
+        else if (document.documentElement && document.documentElement.clientWidth) { // for IE6
+            Geometry.getViewportWidth = function () { return document.documentElement.clientWidth; };
+            Geometry.getViewportHeight = function () { return document.documentElement.clientHeight; };
+        }
+
+    </script>
+</head>
+<body>
+    <input type="button" id="goto" value="go">
+    <input type="button" id="getInfo" value="info">
+    <input type="button" id="getPos" value="pos">
+    <input type="button" id="getRes" value="res">
+</body>
+</html>

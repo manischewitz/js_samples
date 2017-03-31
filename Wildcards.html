@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Wildcards</title>
+    <script type="text/javascript">
+
+        
+        var array = new Array("H", "E", "L", "L", "O");
+        var byte = 87;
+        var long = 10E10;
+        var string = "hello";
+
+        if (array instanceof Array) {
+            alert("'array' is Array");
+        }
+
+        document.write(typeof array + "<br />");
+        document.write(typeof byte + "<br />");
+        document.write(typeof long + "<br />");
+
+        function printOnlyString(val) {
+
+            if (typeof val != "string") alert("Strings only!");
+            else document.write(val);
+
+        }
+
+        printOnlyString(byte);
+        printOnlyString(string);
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

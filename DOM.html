@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Document Object Model</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            document.getElementById("redButton").onclick = function () {
+
+                var list = document.getElementById("list");
+
+                for (var i = 0; i < list.childNodes.length; i++) {
+                    list.childNodes[i].style.color = "red";
+                }
+
+                list.firstChild.style.fontSize = "44px";
+                list.lastChild.style.fontSize = "44px";
+            }
+
+            document.getElementById("blueButton").onclick = function () {
+
+                var list = document.getElementById("prodList");
+
+                for (var i = 0; i < list.childNodes.length; i++) {
+                    
+                    var childNode = list.childNodes[i];
+
+                    if(childNode.nodeType != 1) continue;
+
+                    childNode.style.color = "blue";
+                }
+            }
+
+
+            document.getElementById("backButton").onclick = function () {
+
+                var child = document.getElementById("head");
+
+                child.parentNode.style.background = "grey";
+
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+
+    <div>
+
+        <h1 id="head">HEADER</h1>
+
+        <ul id="list"><li>element one</li><li>element two</li><li>element three</li><li>element four</li><li>element five</li></ul>
+
+        <input type="button" id="redButton" value="get red" />
+
+        <ul id="prodList">
+            <li>element one</li>
+            <li>element two</li>
+            <li>element three</li>
+            <li>element four</li>
+            <li>element five</li>
+        </ul>
+
+        <input type="button" id="blueButton" value="get blue" /><br />
+
+        <input type="button" id="backButton" value="set background" />
+
+    </div>
+</body>
+</html>

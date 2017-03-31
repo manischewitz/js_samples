@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>DOM level zero</title>
+    <script type="text/javascript">
+
+        var button;
+        var paragraphs;
+
+        window.onload = function () {
+            button = document.getElementById("click");
+            paragraphs = document.getElementsByTagName("p");
+
+            button.onclick = function () {
+                this.value = "just changed";
+            }
+
+            for (var i = 0; i < paragraphs.length; i++) {
+                paragraphs[i].onclick = function () {
+                    this.style.backgroundColor = "green";
+                }
+            }
+
+        }
+
+        
+
+
+    </script>
+    <style type="text/css">
+
+        p {
+            background-color: black;
+            width: 100px;
+            height: 100px;
+            float:left;
+            margin-left:10px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <input type="button" id="click" value="this button may be accesed through 'this' statement">
+
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+
+</body>
+</html>

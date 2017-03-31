@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>javaS</title>
+</head>
+<body>
+    <script type="text/javascript">
+       /*
+        function print(message,count) {
+
+            if (isNaN(count) || count < 0 || count == "") {
+                count = 1;
+                message = "Only integer positive number.";
+            }
+
+            if (count == undefined) {
+                count = 1;
+                message = "How much need repeat message?";
+            }
+
+            if (count > 9000) {
+                count = 1;
+                message = "Less than 9000.";
+            }
+
+            for (i = 0; i < Math.floor(count); i++) {
+                document.write(message+"</br>");
+            }
+        }
+
+        var msg = prompt("Message:", "message");
+        var count = prompt("How much need repeat message?", "1");
+
+        print(msg, count);
+
+        alert("Done.");
+        */
+
+    </script>
+    
+    <script type="text/javascript">
+
+        
+
+        function maxValue(a, b, c) {
+            var counter = 0;
+
+            for (i = 0; i < arguments.length+1 ; i++) {
+
+                if (counter == arguments.length) return arguments[i - 1];
+
+                counter = 0;
+
+                for (k = 0; k < arguments.length ; k++) {
+                    
+                    if (arguments[i] > arguments[k]) {
+                        break;
+                    }
+                    counter++;
+                }
+            }
+        }
+            var result = maxValue(-890798796868687,-42,423,423,-243,-6768687,-24,56,-999,-10000000);
+            document.write(result);
+
+    </script>
+</body>
+</html>

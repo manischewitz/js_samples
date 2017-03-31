@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>JAVASCRIPT02</title>
+    <script type="text/javascript">
+
+        var condition = confirm("Hallo World?");
+        var secretNumber = 1;
+        var secretNumberTwo = 2;
+
+        if (condition) {
+            document.write("<p>HALLO WORLD!!!</p>");
+        } else {
+            document.write("<p>Nothing happens</p>");
+        }
+
+        var video = (condition) ? secretNumber : secretNumberTwo;
+        document.write("<h><iframe width='560' height='315' src='https://www.youtube.com/embed/E8ddPMZGMXU' frameborder='0' allowfullscreen></iframe></h>");
+
+
+    </script>
+</head>
+<body>
+
+    <script type="text/javascript">
+
+        var size = prompt("What size of KEK you want???","EXTRA");
+
+        var width = 1 + size;
+        var height = 2 + size;
+
+        if((width*0 == 0 && height*0 == 0) && size<1000){
+                document.write("<p><img src='Shrekcharacter.jpg' width='"+width+"' height='"+height+"'/></p>");
+            } else if (size == "ULTRA") {
+                document.write("<p><img src='Shrekcharacter.jpg' width='1000' height='333'/></p>");
+            }else if(size == "EXTRA"){
+                var kekSize = Math.floor(Math.random() * 500);
+                do {
+                 kekSize-=2;
+                 document.write("<p><img src='Shrekcharacter.jpg' width='5" + kekSize + "' height='" + (kekSize+100) + "'/></p>");
+             }while(kekSize > 0);
+             }else {
+                document.write("<p>ONLY NUMBERS LESS THAN 1000 OR ULTRA</p>");
+            }
+</script>
+
+</body>
+</html>

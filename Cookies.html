@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>cookies</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var cookieArray;
+
+            if (document.cookie) {
+                cookieArray = getCookiesArray();
+                document.body.style.backgroundColor = cookieArray.style;
+            }
+
+            $("set").onclick = function () {
+                var pefStyle = getChecked();
+                document.body.style.backgroundColor = pefStyle;
+                document.cookie = "style=" + encodeURI(pefStyle) + ";expires=Fri, 31 Dec 9999 23:59:59 GMT";
+            }
+
+            function getChecked() {
+                var radioArray = document.getElementsByName("color");
+                for (var i = 0; i < radioArray.length; i++) {
+                    if (radioArray[i].checked) return radioArray[i].value;
+                }
+            }
+
+            function getCookiesArray() {
+                if (!document.cookie) return;
+                console.log("Cookies exist and will be loaded.");
+
+                var array = document.cookie.split(";");
+                var nameValPairArray = {};
+
+                for (var i = 0; i < array.length; i++) {
+                    console.log(array[i]);
+                    var cookie = array[i].split("=");
+                    nameValPairArray[cookie[0]] = decodeURI(cookie[1]);
+                }
+                return nameValPairArray;
+            }
+        }
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+    </script>
+</head>
+<body>
+
+    <form>
+        <input type="radio" name="color" value="blue"> blue
+        <input type="radio" name="color" value="lightgreen"> lightgreen
+        <input type="radio" name="color" value="orange"> orange
+        <input type="radio" name="color" value="purple"> purple
+        <input type="button" id="set" value="set">
+    </form>
+
+</body>
+</html>

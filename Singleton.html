@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Singleton</title>
+    <script type="text/javascript">
+
+        function Singleton() {
+
+
+           if (typeof Singleton.instance === "object") {
+                    return Singleton.instance;
+                }
+
+                this.property = "Some property";
+                Singleton.instance = this;
+        }
+
+        // Singleton.instance = null;
+        var c = new Singleton();
+        document.write(c.property + "<br/>");
+
+        c.property = "changed";
+        var b = new Singleton();
+
+        document.write(b.property + "<br/>");
+
+        document.write(c===b);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

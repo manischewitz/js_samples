@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>web storage</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+
+            var prefBodyColor = window.localStorage.color;
+
+            if (prefBodyColor) {
+                document.body.style.backgroundColor = prefBodyColor;
+            }
+
+            $("localStorage").onclick = function () {
+                var prefColor = getChecked();
+                window.localStorage.color = prefColor;
+                document.body.style.backgroundColor = prefColor;
+            }
+
+            $("sessionStorage").onclick = function () {
+                window.sessionStorage.userstext = $("webStorageValue").value;
+                alert(window.sessionStorage.userstext);
+            }
+
+            function getChecked() {
+                var radioArray = document.getElementsByName("color");
+                for (var i = 0; i < radioArray.length; i++) {
+                    if (radioArray[i].checked) return radioArray[i].value;
+                }
+            }
+            
+        }
+        function $(id) {
+            return document.getElementById(id);
+        }
+
+    </script>
+</head>
+<body>
+
+    <form>
+        <input type="radio" name="color" value="blue"> blue
+        <input type="radio" name="color" value="lightgreen"> lightgreen
+        <input type="radio" name="color" value="orange"> orange
+        <input type="radio" name="color" value="purple"> purple
+        <input type="button" id="localStorage" value="save in to local storage"><br />
+
+        <input type="text" id="webStorageValue">
+        <input type="button" id="sessionStorage" value="save in to session">
+    </form>
+
+</body>
+</html>

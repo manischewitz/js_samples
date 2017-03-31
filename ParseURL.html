@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>ParseURL</title>
+    <script type="text/javascript">
+
+/*
+
+        ?login=yes&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        &password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom&password=no&email=examplecom
+        
+
+*/
+        window.onload = function () {
+
+            var approaches = new Approaches();
+
+            document.getElementById("firstApproach").onclick = function () {
+                var doc = document.getElementById("firstTimer");
+                var result = document.getElementById("firstResult");
+                var params = approaches.generateParams(1E6);
+
+                var start = new Date();
+
+                var pairs = approaches.first(params);
+
+                var end = new Date();
+
+                doc.innerHTML = (end - start) + " ms";
+
+             }
+
+            document.getElementById("secondApproach").onclick = function () {
+                var doc = document.getElementById("secondTimer");
+                var result = document.getElementById("secondResult");
+                var params = approaches.generateParams(1E6);
+
+                var start = new Date();
+
+                var pairs = approaches.first(params);
+
+                var end = new Date();
+
+                doc.innerHTML = (end - start) + " ms";
+
+            }
+            
+        }
+
+
+        function Approaches() {
+
+            const ALPHABET = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+                  "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+                  "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+                  "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
+                  "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+            const ALPHABET_LENGTH = ALPHABET.length;
+
+            this.first = function (url) {
+
+                var pairs = {};
+                var urlVars;
+
+                if (url == undefined) {
+                    urlVars = document.location.search.substring(1);
+                } else {
+                    urlVars = url;
+                }
+
+                var varPairs = urlVars.split("&");
+
+                for (var i = 0; i < varPairs.length; i++) {
+                    var pair = varPairs[i].split("=");
+                    pairs[pair[0]] = pair[1];
+                }
+
+                return pairs;
+            }
+
+            this.second = function (url) {
+
+                var pairs = {};
+                var urlVars;
+
+                if (url == undefined) {
+                    urlVars = document.location.search.substring(1);
+                } else {
+                    urlVars = url;
+                }
+
+                var varPairs = urlVars.split("&");
+
+                for (var i = 0; i < varPairs.length; i++) {
+                    
+                    var pos = varPairs[i].indexOf("=");
+
+                    if (pos == -1) {
+                        continue;
+                    }
+
+                    var key = varPairs[i].substring(0, pos);
+                    var value = varPairs[i].substring(pos + 1);
+
+                    pairs[key] = value;
+                }
+                return pairs;
+            }
+
+            this.generateParams = function (count) {
+                function generateRandomNumber(start, end) {
+                    if (start > end) return;
+                    var diff = end - start + 1;
+                    return start + Math.floor(diff * Math.random());
+                }
+
+                function generateWord() {
+                    var wordLength = generateRandomNumber(5, 9);
+                    var word = "";
+
+                    for (var i = 0; i < wordLength; i++) {
+                        word += ALPHABET[generateRandomNumber(0, ALPHABET_LENGTH - 1)];
+                    }
+                    return word;
+                }
+
+                var params = "?";
+
+                for (var i = 0; i < count; i++) {
+                    params += generateWord() + "=" + generateWord() + "&";
+                    if (i == count) params += generateWord() + "=" + generateWord();
+                }
+
+                return params;
+            }
+
+        }
+
+
+    </script>
+</head>
+<body>
+
+    <input type="button" id="firstApproach" value="use first approach"><br />
+    <h2 id="firstTimer"></h2>
+    <p id="firstResult"></p>
+
+    <input type="button" id="secondApproach" value="use second approach">
+    <h2 id="secondTimer"></h2>
+    <p id="secondResult"></p>
+
+</body>
+</html>

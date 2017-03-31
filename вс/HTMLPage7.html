@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>javasc</title>
+</head>
+<body>
+    <script type="text/javascript">
+
+        function printMessage(message,count){
+        
+            if(arguments.length != 2){
+                document.write("<p><b style='color:red;'>ERROR</b></br> <em>Only two arguments.</em></p>");
+            }else{
+                for (var i = 0; i < count;i++){
+                    document.write("<p>"+message+"</p>");
+                }
+            }
+        }
+
+        this.printMessage("Hallo", 6, 2);
+        
+        var global = "im global!";
+        var locale = "im local!";
+
+        function test() {
+            var locale = "im locale inside!";
+            document.write(this.locale);
+            document.write(locale);
+            document.write(this.global);
+        }
+
+        function assignNewValue(val) {
+            this.global = val;
+        }
+
+        test();
+        assignNewValue("------NEW VALUE-----");
+        test();
+
+        document.write("<h1>Recursion</h1>");
+
+        function recursion(counter,message) {
+
+            if (isNaN(counter) || counter == null) {
+                document.write("Only numbers.");
+                return null;
+            }
+
+            if (counter > 0) {
+                counter--;
+            } else if (counter < 0) {
+                counter++;
+            }
+
+            document.write("<p style='color:blue;'>" + message +" "+counter+" times BEFORE</p>");
+
+            if (counter != 0) {
+                recursion(counter, message);
+            }
+
+            document.write("<p style='color:blue;'>" + message + " " + counter + " times AFTER</p>");
+
+        }
+
+        this.recursion(6, "numbers.");
+
+        document.write("<h1>Factorial</h1>");
+
+        var value = parseInt(prompt("Enter a number.", "0"));
+
+        function factorial(number) {
+
+            if (number <= 1) {
+                return 1;
+            }
+
+            return number * factorial(number-1);
+        }
+
+        document.write("<p>Result: "+value+"! "+factorial(value)+"</p>");
+    </script>
+</body>
+</html>
